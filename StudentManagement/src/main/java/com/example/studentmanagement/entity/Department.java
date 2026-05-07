@@ -25,4 +25,10 @@ public class Department {
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Teacher> teachers = new ArrayList<>(); // target teacher class
+
+    public void addStudent(Student student)
+    {
+        students.add(student);
+        student.setDepartment(this);
+    }
 }

@@ -10,4 +10,5 @@ public class DepartmentService {
     {
         this.departmentRepository= departmentRepository;
     }
+
 }

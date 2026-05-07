@@ -1,6 +1,10 @@
 package com.example.studentmanagement.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,10 +16,11 @@ public class Student {
      @GeneratedValue
      private long id;
 
-     @Column(nullable = false)
+     @NotBlank(message= "name can not be blanck")
      private String name;
 
-     @Column(nullable= false)
+     @Email(message = "Invalid email format")
+     @NotBlank(message = "Email cannot be blank")
      private String email;
 
      @OneToOne(cascade = CascadeType.ALL)
