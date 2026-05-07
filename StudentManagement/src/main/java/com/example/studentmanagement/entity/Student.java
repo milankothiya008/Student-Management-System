@@ -7,18 +7,22 @@ import lombok.*;
 @Getter
 @Setter
 public class Student {
+
      @Id
      @GeneratedValue
-    private long id;
+     private long id;
 
+     @Column(nullable = false)
      private String name;
+
+     @Column(nullable= false)
      private String email;
 
-     @OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
+     @OneToOne(cascade = CascadeType.ALL)
+     @JoinColumn(name="user_id") // control relationship
+     private User user;
 
-     @ManyToOne
-    @JoinColumn(name="department_id")
-    private Department department;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name="department_id")
+     private Department department;
 }
