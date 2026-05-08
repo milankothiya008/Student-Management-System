@@ -5,6 +5,7 @@ import com.example.studentmanagement.entity.Department;
 import com.example.studentmanagement.entity.Student;
 import com.example.studentmanagement.repository.DepartmentRepository;
 import com.example.studentmanagement.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -23,6 +24,7 @@ public class StudentService {
         this.departmentRepository= departmentRepository;
     }
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------
+    @Transactional
     public Student save(Student student)
     {
         Department dept= student.getDepartment();
@@ -61,17 +63,17 @@ public class StudentService {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    @Transactional
     public Student update(Long id, Student updatedStudent)
     {
-        Student student = findbyid(id);
+        Student student = studentrepository.findById(id).orElseThrow(()-> new StudentNotFoundException("Student not found of this id: "+ id));
         student.setName(updatedStudent.getName());
         student.setEmail(updatedStudent.getEmail());
         return studentrepository.save(student);
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    @Transactional
     public void  delete(Long id)
     {
         Student student= studentrepository.findById(id).orElseThrow(()->new StudentNotFoundException("Student not exist by Id: "+ id));

@@ -31,4 +31,9 @@ public class Department {
         students.add(student);
         student.setDepartment(this);
     }
+    public void addTeacher(Teacher teacher)
+    {
+        teachers.add(teacher);
+        teacher.setDepartment(this);
+    }
 }
